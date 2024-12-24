@@ -1,0 +1,78 @@
+[env]
+TERM = "xterm-256color"
+
+[window]
+opacity = 1
+
+padding.x = 10
+padding.y = 10
+
+position.x = 100
+position.y = 100
+
+dimensions.columns = 130
+dimensions.lines = 30
+
+decorations_theme_variant = "Dark"
+
+[font]
+normal.family = "JetbrainsMono Nerd Font"
+bold.family = "JetbrainsMono Nerd Font"
+italic.family = "JetbrainsMono Nerd Font"
+bold_italic.family = "JetbrainsMono Nerd Font"
+size = 12.0
+
+# Default colorss
+[colors.primary]
+  background = '#121212'
+  foreground = '#F9F9F9'
+
+[colors.cursor]
+  text = '#F9F9F9'
+  cursor = '#BFBFBF'
+
+# Normal colorss
+[colors.normal]
+  black =   '#232323'
+  red =     '#FF5454'
+  green =   '#00CC7A'
+  yellow =  '#FFD700'
+  blue =    '#00bFFF'
+  magenta = '#FF00FF'
+  cyan =    '#48d1cc'
+  white =   '#bfbfbf'
+
+# Bright colorss
+[colors.bright]
+  black =   '#767c77'
+  red =     '#ff1a75'
+  green =   '#1affa3'
+  yellow =  '#ffff00'
+  blue =    '#28c9ff'
+  magenta = '#ff33ff'
+  cyan =    '#09fff2'
+  white =   '#f9f9f9'
+
+[mouse]
+hide_when_typing = true
+
+[keyboard]
+bindings = [
+    { key = "V", mods = "Control|Shift", action = "Paste" },
+    { key = "V", mods = "Control", action = "Paste" },
+    { key = "C", mods = "Control|Shift", action = "Copy" },
+    { key = "C", mods = "Control", action = "Copy" },
+    { key = "T", mods = "Control|Shift", action = "SpawnNewInstance" },
+    { key = "Return", mods = "Alt", action = "ToggleFullscreen" },
+    { key = "Plus", mods = "Control", action = "IncreaseFontSize" },
+    { key = "Minus", mods = "Control", action = "DecreaseFontSize" },
+    { key = "Key0", mods = "Control", action = "ResetFontSize" },
+	# Binding for Control+Backspace to delete a word
+    { key = "Back", mods = "Control", chars = "\u0017" },
+    # New binding for Control+U to delete a full line
+    { key = "U", mods = "Control", chars = "\u0015" },
+]
+
+[selection]
+semantic_escape_chars = ",│`|:\"' ()[]{}<>"
+save_to_clipboard = true
