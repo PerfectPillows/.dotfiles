@@ -1,5 +1,5 @@
--- Basic settings
--- Set <space> as the leader key
+-- Basic Settings
+-- set <space> as the leader key
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.opt.number = true
@@ -10,13 +10,13 @@ vim.opt.expandtab = true
 vim.opt.confirm = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
--- Hide the default mode indicator as lualine will show it
+-- hide the default mode indicator as lualine will show it
 vim.opt.showmode = false
--- Set clipboard to always use system clipboard
+-- set clipboard to always use system clipboard
 vim.opt.clipboard = 'unnamedplus'
 vim.opt.termguicolors = true
 
--- Install lazy.nvim if not already installed
+-- install lazy.nvim if not already installed
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -30,19 +30,19 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Configure plugins
+-- configure plugins
 require("lazy").setup({
 
-  -- Auto-pairing of brackets
+  -- auto-pairing of brackets
   {
     "windwp/nvim-autopairs",
-    event = "InsertEnter",
+    event = "insertenter",
     config = function()
       require("nvim-autopairs").setup{}
     end
   },
 
-  -- Theme
+  -- theme
   {
 	"zootedb0t/citruszest.nvim", 
 	lazy = false,
@@ -56,16 +56,16 @@ require("lazy").setup({
 	  vim.cmd([[colorscheme citruszest]])
 	end,
   },
-  -- Commenting plugin 
+  -- commenting plugin 
   {
-    'numToStr/Comment.nvim',
+    'numtostr/comment.nvim',
     opts = {
       -- add any configuration here
     },
     lazy = false,
   },
   
-  -- LSP Support
+  -- lsp support
   {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -74,16 +74,16 @@ require("lazy").setup({
     },
   },
   
-  -- Autocompletion
+  -- autocompletion
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
-      "L3MON4D3/LuaSnip",
+      "l3mon4d3/luasnip",
     },
   },
  
-   -- Status Line Bottom
+   -- status line bottom
   {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -95,10 +95,10 @@ require("lazy").setup({
           component_separators = '|',
           section_separators = '',
 		  disabled_filetypes = {
-			  statusline = {'NvimTree'},
+			  statusline = {'nvimtree'},
 			  winbar = {},
 		  },
-		   ignore_focus = {'NvimTree'},
+		   ignore_focus = {'nvimtree'},
         },
       }
     end,
@@ -130,7 +130,7 @@ require("lazy").setup({
     end,
   },
   
-	 -- Top Bar
+	 -- top bar
 	{
 	  'akinsho/bufferline.nvim',
 	  version = "*",
@@ -149,7 +149,7 @@ require("lazy").setup({
 	  }
 	},
   
-  -- Indentation lines
+  -- indentation lines
 	{
 	  "lukas-reineke/indent-blankline.nvim",
 	  main = "ibl",
@@ -168,7 +168,7 @@ require("lazy").setup({
 	  end
 	},	
   
-  -- DAP (Debug Adapter Protocol)
+  -- dap (debug adapter protocol)
   {
     "mfussenegger/nvim-dap",
     dependencies = {
@@ -191,33 +191,33 @@ require("lazy").setup({
         dapui.close()
       end
 
-      -- Set up nvim-dap-go
-      -- Set up nvim-dap-go with detailed configuration
+      -- set up nvim-dap-go
+      -- set up nvim-dap-go with detailed configuration
       require('dap-go').setup {
-        -- Additional dap configurations can be added.
+        -- additional dap configurations can be added.
         -- dap_configurations accepts a list of tables where each entry
-        -- represents a dap configuration. For more details do:
+        -- represents a dap configuration. for more details do:
         -- :help dap-configuration
         dap_configurations = {
           {
-            -- Must be "go" or it will be ignored by the plugin
+            -- must be "go" or it will be ignored by the plugin
             type = "go",
-            name = "Attach remote",
+            name = "attach remote",
             mode = "remote",
             request = "attach",
           },
           {
             type = "go",
-            name = "Debug App",
+            name = "debug app",
             request = "launch",
-            program = "${workspaceFolder}/main.go",
-			buildFlags = require("dap-go").get_build_flags,
+            program = "${workspacefolder}/main.go",
+			buildflags = require("dap-go").get_build_flags,
           },
         },
         -- delve configurations
         delve = {
           -- the path to the executable dlv which will be used for debugging.
-          -- by default, this is the "dlv" executable on your PATH.
+          -- by default, this is the "dlv" executable on your path.
           path = "dlv",
           -- time to wait for delve to initialize the debug session.
           -- default to 20 seconds
@@ -246,19 +246,40 @@ require("lazy").setup({
         },
       }
 
-      -- Debugging keymaps
-      vim.keymap.set('n', '<F5>', function() require('dap').continue() end, { desc = 'Debug: Start/Continue' })
-      vim.keymap.set('n', '<F10>', function() require('dap').step_over() end, { desc = 'Debug: Step Over' })
-      vim.keymap.set('n', '<F11>', function() require('dap').step_into() end, { desc = 'Debug: Step Into' })
-      vim.keymap.set('n', '<F12>', function() require('dap').step_out() end, { desc = 'Debug: Step Out' })
-      vim.keymap.set('n', '<F1>', function() require('dap').toggle_breakpoint() end, { desc = 'Debug: Set Breakpoint' })
-      vim.keymap.set('n', '<S-F1>', function() require('dap').clear_breakpoints() end, { desc = 'Debug: Remove Breakpoint' })
-      vim.keymap.set('n', '<A-S-F1>', function() require('dap').clear_breakpoints() end, { desc = 'Debug: Remove All Breakpoints' })
+      -- debugging keymaps
+      vim.keymap.set('n', '<f5>', function() require('dap').continue() end, { desc = 'debug: start/continue' })
+      vim.keymap.set('n', '<f10>', function() require('dap').step_over() end, { desc = 'debug: step over' })
+      vim.keymap.set('n', '<f11>', function() require('dap').step_into() end, { desc = 'debug: step into' })
+      vim.keymap.set('n', '<f12>', function() require('dap').step_out() end, { desc = 'debug: step out' })
+      vim.keymap.set('n', '<f1>', function() require('dap').toggle_breakpoint() end, { desc = 'debug: set breakpoint' })
+      vim.keymap.set('n', '<s-f1>', function() require('dap').clear_breakpoints() end, { desc = 'debug: remove breakpoint' })
+      vim.keymap.set('n', '<a-s-f1>', function() require('dap').clear_breakpoints() end, { desc = 'debug: remove all breakpoints' })
     end,
   },
 
+  --lazy git 
+  {
+      "kdheepak/lazygit.nvim",
+      lazy = true,
+      cmd = {
+          "lazygit",
+          "lazygitconfig",
+          "lazygitcurrentfile",
+          "lazygitfilter",
+          "lazygitfiltercurrentfile",
+      },
+      -- optional for floating window border decoration
+      dependencies = {
+          "nvim-lua/plenary.nvim",
+      },
+      -- setting the keybinding for lazygit with 'keys' is recommended in
+      -- order to load the plugin when the command is run for the first time
+      keys = {
+          { "<leader>lg", "<cmd>lazygit<cr>", desc = "lazygit" }
+      }
+  },
 
-  -- Telescope
+  -- telescope
   {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
@@ -286,7 +307,7 @@ require("lazy").setup({
             previewer = false,
           },
           live_grep = {
-            -- Add additional_args to include hidden files in live_grep
+            -- add additional_args to include hidden files in live_grep
             additional_args = function(opts)
             return {"--hidden"}
             end
@@ -295,18 +316,18 @@ require("lazy").setup({
 		defaults = {
           mappings = {
             i = {
-              ['<C-u>'] = false,
-              ['<C-d>'] = false,
+              ['<c-u>'] = false,
+              ['<c-d>'] = false,
             },
           },
 		  path_display = { "smart" },
         },
       }
 
-      -- Enable telescope fzf native, if installed
+      -- enable telescope fzf native, if installed
       pcall(telescope.load_extension, 'fzf')
 
-      -- Telescope live_grep in git root
+      -- telescope live_grep in git root
       local function find_git_root()
         local current_file = vim.api.nvim_buf_get_name(0)
         local current_dir
@@ -316,9 +337,9 @@ require("lazy").setup({
         else
           current_dir = vim.fn.fnamemodify(current_file, ':h')
         end
-        local git_root = vim.fn.systemlist('git -C ' .. vim.fn.escape(current_dir, ' ') .. ' rev-parse --show-toplevel')[1]
+        local git_root = vim.fn.systemlist('git -c ' .. vim.fn.escape(current_dir, ' ') .. ' rev-parse --show-toplevel')[1]
         if vim.v.shell_error ~= 0 then
-          print 'Not a git repository. Searching on current working directory'
+          print 'not a git repository. searching on current working directory'
           return cwd
         end
         return git_root
@@ -333,31 +354,31 @@ require("lazy").setup({
         end
       end
 
-      vim.api.nvim_create_user_command('LiveGrepGitRoot', live_grep_git_root, {})
+      vim.api.nvim_create_user_command('livegrepgitroot', live_grep_git_root, {})
 
-      -- Telescope keymaps
-      vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-      vim.keymap.set('n', '<leader>\\', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+      -- telescope keymaps
+      vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] find recently opened files' })
+      vim.keymap.set('n', '<leader>\\', require('telescope.builtin').buffers, { desc = '[ ] find existing buffers' })
       vim.keymap.set('n', '<leader>/', function()
         require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
           winblend = 10,
           previewer = false,
         })
-      end, { desc = '[/] Fuzzily search in current buffer' })
-      vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-      vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-      vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-      vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-      vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-      vim.keymap.set('n', '<leader>sG', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
-      vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-      vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
-	  vim.keymap.set('n', '<leader>fs', require('telescope.builtin').lsp_document_symbols, { desc = '[F]ind [S]ymbols in current document' })
+      end, { desc = '[/] fuzzily search in current buffer' })
+      vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'search [g]it [f]iles' })
+      vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[s]earch [f]iles' })
+      vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[s]earch [h]elp' })
+      vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[s]earch current [w]ord' })
+      vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[s]earch by [g]rep' })
+      vim.keymap.set('n', '<leader>sg', ':livegrepgitroot<cr>', { desc = '[s]earch by [g]rep on git root' })
+      vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[s]earch [d]iagnostics' })
+      vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[s]earch [r]esume' })
+	  vim.keymap.set('n', '<leader>fs', require('telescope.builtin').lsp_document_symbols, { desc = '[f]ind [s]ymbols in current document' })
     end,
   },
 })
 
--- Set up nvim-autopairs
+-- set up nvim-autopairs
 local npairs = require("nvim-autopairs")
 npairs.setup({
   check_ts = true,
@@ -368,24 +389,24 @@ npairs.setup({
   }
 })
 
--- If you want to automatically add spaces between parentheses
+-- if you want to automatically add spaces between parentheses
 -- (|) becomes ( | )
-local Rule = require('nvim-autopairs.rule')
+local rule = require('nvim-autopairs.rule')
 npairs.add_rules {
-  Rule(' ', ' ')
+  rule(' ', ' ')
     :with_pair(function (opts)
       local pair = opts.line:sub(opts.col - 1, opts.col)
       return vim.tbl_contains({ '()', '[]', '{}' }, pair)
     end)
 }
 
--- Set up Mason
+-- set up mason
 require("mason").setup()
 require("mason-lspconfig").setup({
   ensure_installed = { "tsserver", "gopls", "angularls" },
 })
 
--- LSP
+-- lsp
 local lspconfig = require("lspconfig")
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
@@ -399,33 +420,33 @@ lspconfig.gopls.setup({
       },
       staticcheck = true,
       gofumpt = true,
-      -- Add these settings
+      -- add these settings
       codelenses = {
         gc_details = true,
         generate = true,
         regenerate_cgo = true,
         upgrade_dependency = true,
       },
-      usePlaceholders = true,
-      completeUnimported = true,  -- auto-import completion items
-      importShortcut = "Both",    -- Both: Keep existing and add if missing
+      useplaceholders = true,
+      completeunimported = true,  -- auto-import completion items
+      importshortcut = "both",    -- both: keep existing and add if missing
     },
   },
 })
 
--- TypeScript/JavaScript setup with tsserver
+-- typescript/javascript setup with tsserver
 lspconfig.tsserver.setup({
   capabilities = capabilities,
-  -- Add any specific settings for typescript-language-server here if needed
+  -- add any specific settings for typescript-language-server here if needed
 })
 
 
--- Angular setup
+-- angular setup
 lspconfig.angularls.setup({
   capabilities = capabilities,
 })
 
--- Set up autocompletion
+-- set up autocompletion
 local cmp = require("cmp")
 cmp.setup({
   snippet = {
@@ -434,10 +455,10 @@ cmp.setup({
     end,
   },
   mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ['<c-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<c-f>'] = cmp.mapping.scroll_docs(4),
+    ['<c-space>'] = cmp.mapping.complete(),
+    ['<cr>'] = cmp.mapping.confirm({ select = true }),
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
@@ -447,16 +468,16 @@ cmp.setup({
   })
 })
 
--- Format on save for Go files
-vim.api.nvim_create_autocmd("BufWritePre", {
+-- format on save for go files
+vim.api.nvim_create_autocmd("bufwritepre", {
   pattern = "*.go",
   callback = function()
     vim.lsp.buf.format({ async = false })
   end,
 })
 
--- Quit nvim tree on all buffer close
-vim.api.nvim_create_autocmd("BufEnter", {
+-- quit nvim tree on all buffer close
+vim.api.nvim_create_autocmd("bufenter", {
   nested = true,
   callback = function()
     if #vim.api.nvim_list_wins() == 1 and require("nvim-tree.utils").is_nvim_tree_buf() then
@@ -465,82 +486,82 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end
 })
 
--- KEYMAPS
+-- keymaps
 
 
---- Add keymaps for bufferline.nvim
+--- add keymaps for bufferline.nvim
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
--- Move to previous/next
-map('n', '<A-,>', '<cmd>BufferLineCyclePrev<cr>', opts)
-map('n', '<A-.>', '<cmd>BufferLineCycleNext<cr>', opts)
+-- move to previous/next
+map('n', '<a-,>', '<cmd>bufferlinecycleprev<cr>', opts)
+map('n', '<a-.>', '<cmd>bufferlinecyclenext<cr>', opts)
 
--- Re-order to previous/next
-map('n', '<A-<>', '<cmd>BufferLineMovePrev<cr>', opts)
-map('n', '<A->>', '<cmd>BufferLineMoveNext<cr>', opts)
+-- re-order to previous/next
+map('n', '<a-<>', '<cmd>bufferlinemoveprev<cr>', opts)
+map('n', '<a->>', '<cmd>bufferlinemovenext<cr>', opts)
 
--- Pin/Unpin buffer
-map('n', '<A-p>', '<cmd>BufferLineTogglePin<cr>', opts)
+-- pin/unpin buffer
+map('n', '<a-p>', '<cmd>bufferlinetogglepin<cr>', opts)
 
--- Close buffer
-map('n', '<A-w>', '<cmd>bdelete<cr>', opts)
+-- close buffer
+map('n', '<a-w>', '<cmd>bdelete<cr>', opts)
 
--- Force close buffer
-map('n', '<A-W>', '<cmd>bdelete!<cr>', opts)
+-- force close buffer
+map('n', '<a-w>', '<cmd>bdelete!<cr>', opts)
 
--- Close all but current buffer
-map('n', '<A-P>', '<cmd>BufferLineCloseLeft<cr><cmd>BufferLineCloseRight<cr>', opts)
+-- close all but current buffer
+map('n', '<a-p>', '<cmd>bufferlinecloseleft<cr><cmd>bufferlinecloseright<cr>', opts)
 
 
--- LSP keybindings
-vim.api.nvim_create_autocmd('LspAttach', {
-  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+-- lsp keybindings
+vim.api.nvim_create_autocmd('lspattach', {
+  group = vim.api.nvim_create_augroup('userlspconfig', {}),
   callback = function(ev)
     local opts = { buffer = ev.buf }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.declaration, opts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', 'k', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-	-- Add format keymap
+	-- add format keymap
     vim.keymap.set('n', '<space>f', function()
       vim.lsp.buf.format({ async = false })
-    end, { buffer = ev.buf, desc = "Format current buffer" })
+    end, { buffer = ev.buf, desc = "format current buffer" })
   end,
 })
 
--- Explicit Copy
-vim.keymap.set('v', '<C-c>', '"+y', { noremap = true, silent = true, desc = "Copy to system clipboard" })
-vim.keymap.set('n', '<C-v>', '"+p', { noremap = true, silent = true, desc = "Paste from system clipboard" })
+-- explicit copy
+vim.keymap.set('v', '<c-c>', '"+y', { noremap = true, silent = true, desc = "copy to system clipboard" })
+vim.keymap.set('n', '<c-v>', '"+p', { noremap = true, silent = true, desc = "paste from system clipboard" })
 
 -- keymaps for indentation 
-vim.keymap.set('v', '<', '<gv', { noremap = true, silent = true, desc = "Indent left and reselect" })
-vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true, desc = "Indent right and reselect" })
-vim.keymap.set('v', '<Tab>', '>gv', { noremap = true, silent = true, desc = "Indent right and reselect" })
-vim.keymap.set('v', '<S-Tab>', '<gv', { noremap = true, silent = true, desc = "Indent left and reselect" })
+vim.keymap.set('v', '<', '<gv', { noremap = true, silent = true, desc = "indent left and reselect" })
+vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true, desc = "indent right and reselect" })
+vim.keymap.set('v', '<tab>', '>gv', { noremap = true, silent = true, desc = "indent right and reselect" })
+vim.keymap.set('v', '<s-tab>', '<gv', { noremap = true, silent = true, desc = "indent left and reselect" })
 
 -- keymaps for neo-tree
-vim.api.nvim_set_keymap('n', '<leader>E', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>2', ':NvimTreeFocus<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>e', ':nvimtreetoggle<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>2', ':nvimtreefocus<cr>', { noremap = true, silent = true })
 -- keymap to jump back to the editor
-vim.api.nvim_set_keymap('n', '<leader>e', ':wincmd p<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>3', ':NvimTreeOpen<CR>:lua require("nvim-tree.api").tree.expand_all()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>4', ':NvimTreeOpen<CR>:lua require("nvim-tree.api").tree.collapse_all()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>e', ':wincmd p<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>3', ':nvimtreeopen<cr>:lua require("nvim-tree.api").tree.expand_all()<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>4', ':nvimtreeopen<cr>:lua require("nvim-tree.api").tree.collapse_all()<cr>', { noremap = true, silent = true })
 
 
--- Keymaps to clear search highlights 
-vim.api.nvim_set_keymap('n', '<leader>h', ':nohlsearch<CR>', {noremap = true, silent = true})
+-- keymaps to clear search highlights 
+vim.api.nvim_set_keymap('n', '<leader>h', ':nohlsearch<cr>', {noremap = true, silent = true})
 
--- Movement with hjkl in insert mode 
-vim.api.nvim_set_keymap('i', '<A-h>', '<Left>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<A-j>', '<Down>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<A-k>', '<Up>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<A-l>', '<Right>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<C-h>', '<C-Left>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<C-l>', '<C-Right>', { noremap = true, silent = true })
+-- movement with hjkl in insert mode 
+vim.api.nvim_set_keymap('i', '<a-h>', '<left>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<a-j>', '<down>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<a-k>', '<up>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<a-l>', '<right>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<c-h>', '<c-left>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<c-l>', '<c-right>', { noremap = true, silent = true })
 
--- Helper function to check if movement is possible
+-- helper function to check if movement is possible
 local function can_move(direction, start_line, end_line)
   local total_lines = vim.api.nvim_buf_line_count(0)
   if direction == "up" then
@@ -550,7 +571,7 @@ local function can_move(direction, start_line, end_line)
   end
 end
 
--- Function to move block
+-- function to move block
 local function move_block(direction)
   local start_line, end_line, _ = unpack(vim.fn.getpos("'<"), 2)
   end_line = vim.fn.getpos("'>")[2]
@@ -563,11 +584,11 @@ local function move_block(direction)
     end
     vim.cmd("normal! gv=gv")
   else
-    print("Can't move " .. direction .. " any further!")
+    print("can't move " .. direction .. " any further!")
   end
 end
 
--- Function to move single line
+-- function to move single line
 local function move_line(direction)
   local line_num = vim.fn.line('.')
   
@@ -579,14 +600,14 @@ local function move_line(direction)
     end
     vim.cmd("normal! ==")
   else
-    print("Can't move " .. direction .. " any further!")
+    print("can't move " .. direction .. " any further!")
   end
 end
 
 -- key mappings for code block movement
-vim.keymap.set("v", "<A-j>", function() move_block("down") end, { noremap = true, silent = true })
-vim.keymap.set("v", "<A-k>", function() move_block("up") end, { noremap = true, silent = true })
-vim.keymap.set("n", "<A-j>", function() move_line("down") end, { noremap = true, silent = true })
-vim.keymap.set("n", "<A-k>", function() move_line("up") end, { noremap = true, silent = true })
+vim.keymap.set("v", "<a-j>", function() move_block("down") end, { noremap = true, silent = true })
+vim.keymap.set("v", "<a-k>", function() move_block("up") end, { noremap = true, silent = true })
+vim.keymap.set("n", "<a-j>", function() move_line("down") end, { noremap = true, silent = true })
+vim.keymap.set("n", "<a-k>", function() move_line("up") end, { noremap = true, silent = true })
 
 
