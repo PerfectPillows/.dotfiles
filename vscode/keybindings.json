@@ -1,0 +1,90 @@
+// Place your key bindings in this file to override the defaults
+[
+  {
+    "key": "ctrl+k ctrl+s",
+    "command": "saveAll"
+  },
+  {
+    "key": "ctrl+k s",
+    "command": "-saveAll"
+  },
+  {
+    "key": "ctrl+k s",
+    "command": "workbench.action.files.saveFiles"
+  },
+  {
+    "key": "ctrl+shift+a",
+    "command": "workbench.panel.chat.view.copilot.focus"
+  },
+  {
+    "key": "ctrl+k ctrl+oem_minus",
+    "command": "github.copilot.toggleCopilot"
+  },
+  {
+    "key": "ctrl+shift+f",
+    "command": "workbench.action.findInFiles"
+  },
+  {
+    "key": "ctrl+shift+f",
+    "command": "-workbench.action.findInFiles"
+  },
+  {
+    "key": "ctrl+shift+g",
+    "command": "workbench.view.scm",
+    "when": "workbench.scm.active && !gitlens:disabled && config.gitlens.keymap == 'chorded'"
+  },
+  {
+    "key": "ctrl+shift+g g",
+    "command": "-workbench.view.scm",
+    "when": "workbench.scm.active && !gitlens:disabled && config.gitlens.keymap == 'chorded'"
+  },
+  {
+    "key": "ctrl+'",
+    "command": "git.stashView"
+  },
+  {
+    "key": "ctrl+shift+f",
+    "command": "-workbench.action.terminal.searchWorkspace",
+    "when": "terminalFocus && terminalProcessSupported && terminalTextSelected"
+  },
+  {
+    "key": "ctrl+; ctrl+shift+f",
+    "command": "-testing.coverageCurrentFile",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "shift+alt+.",
+    "command": "-editor.action.autoFix",
+    "when": "textInputFocus && !editorReadonly && supportedCodeAction =~ /(\\s|^)quickfix\\b/"
+  },
+  {
+    "key": "ctrl+p",
+    "command": "workbench.action.quickOpen",
+    "when": "true"
+  },
+  {
+    "key": "ctrl+f",
+    "command": "actions.find",
+    "when": "true"
+  },
+  {
+    "key": "ctrl+2",
+    "command": "workbench.action.terminal.focus",
+    "when": "true"
+  },
+  {
+    "key": "ctrl+3",
+    "command": "workbench.view.explorer",
+    "when": "true"
+  },
+  {
+    "key": "ctrl+,",
+    "command": "workbench.action.terminal.toggleTerminal",
+    "when": "true"
+  },
+  {
+    "key": "ctrl+.",
+    "command": "workbench.action.toggleSidebarVisibility",
+    "when": "true"
+  }
+]
